@@ -9,7 +9,7 @@
 #include "Server.h"
 #include "ClientHandler.h"
 using namespace server_side;
-class MySerialServer: public Server {
+class MySerialServer: public server_side::Server {
 
 	bool _stop = false;
 public:

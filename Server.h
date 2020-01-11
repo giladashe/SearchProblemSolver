@@ -6,6 +6,7 @@
 #define SEARCHPROBLEMSOLVER_SERVER_H
 
 #include "ClientHandler.h"
+#include "MySerialServer.h"
 
 namespace server_side {
 	class Server {
@@ -15,6 +16,15 @@ namespace server_side {
 		virtual ~Server() = 0;
 
 		virtual void stop() = 0;
+	};
+}
+namespace boot{
+	class Main{
+	public:
+		static int main(int argc, char *argv[]){
+			server_side::Server* server = new MySerialServer();
+
+		}
 	};
 }
 
