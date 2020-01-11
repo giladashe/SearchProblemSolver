@@ -12,12 +12,12 @@ using namespace server_side;
 class MySerialServer: public Server {
 
 public:
-	~MySerialServer() override {};
+	~MySerialServer() override;
 
 	// pure virtual execute so the other commands classes will have to implement
 	void stop() override;
 
-	void open(int port, ClientHandler c) override ;
+	void open(int port, ClientHandler* c) override ;
 };
 
 #endif //SEARCHPROBLEMSOLVER_MYSERIALSERVER_H

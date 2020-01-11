@@ -14,7 +14,7 @@ class MyTestClientHandler: public ClientHandler{
 Solver<Problem,Solution> _solver;
 CacheManager* _cm;
 public:
-	MyTestClientHandler(Solver<Problem,Solution> solver, CacheManager cm);
+	MyTestClientHandler(Solver<Problem,Solution> solver, CacheManager* cm);
 };
 
 #endif //SEARCHPROBLEMSOLVER_MYTESTCLIENTHANDLER_H

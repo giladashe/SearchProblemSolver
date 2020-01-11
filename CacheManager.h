@@ -9,15 +9,16 @@
 
 using namespace std;
 
+template<class Problem, class Solution>
 class CacheManager {
 
 public:
-	virtual void insert(string key, string value) = 0;
+	virtual void saveSolution(Problem problem, Solution solution) = 0;
 
-	//checks if has it in cache or disk. if not - calculate solution and then insert.
-	virtual string get(string key) = 0;
+	//checks if has it in cache or disk. if not - calculate solution and then saveSolution.
+	virtual Solution getSolution(Problem problem) = 0;
 
-	virtual bool hasSolution(string problem) = 0;
+	virtual bool hasSolution(Problem problem) = 0;
 
 };
 
