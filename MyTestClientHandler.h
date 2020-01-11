@@ -12,9 +12,10 @@
 template<class Problem, class Solution>
 class MyTestClientHandler: public ClientHandler{
 Solver<Problem,Solution> _solver;
-CacheManager* _cm;
+CacheManager<Problem,Solution>* _cm;
 public:
-	MyTestClientHandler(Solver<Problem,Solution> solver, CacheManager* cm);
+
+	MyTestClientHandler(Solver<Problem,Solution> solver, CacheManager<Problem,Solution>* cm);
 };
 
 #endif //SEARCHPROBLEMSOLVER_MYTESTCLIENTHANDLER_H

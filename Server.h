@@ -23,8 +23,17 @@ namespace boot{
 	public:
 		static int main(int argc, char *argv[]){
 			server_side::Server* server = new MySerialServer();
+			CacheManager<string,string> *cacheManager = new FileCacheManager<string,string>();
+            cacheManager->saveSolution("something", "asfdgrsfasd");
+            string solution;
+            if (cacheManager->hasSolution("something")) {
+                solution = cacheManager->getSolution("something");
+            } else {
+                cout << "something" << endl;
+            }
 
-		}
+
+        }
 	};
 }
 

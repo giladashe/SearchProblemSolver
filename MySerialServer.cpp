@@ -5,15 +5,14 @@
 #include "MySerialServer.h"
 
 MySerialServer::~MySerialServer() {
-
 }
 
-// pure virtual execute so the other commands classes will have to implement
 void MySerialServer::stop() {
-
+    this->_stop = true;
 }
 
-void MySerialServer::open(int port, ClientHandler c){
+void MySerialServer::open(int port, ClientHandler* c){
+    while (!_stop){
 
+    }
 }
-
