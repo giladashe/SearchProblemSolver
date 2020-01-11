@@ -11,6 +11,7 @@
 using namespace server_side;
 class MySerialServer: public Server {
 
+	bool _stop = false;
 public:
 	~MySerialServer() override;
 
