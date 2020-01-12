@@ -11,8 +11,7 @@ using namespace std;
 
 class ClientHandler {
 public:
-	//ints for sockets
-	virtual void handleClient(int inputStream, int outputStream) = 0;
+	virtual void handleClient(int clientSocket) = 0;
 };
 
 
