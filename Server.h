@@ -22,6 +22,7 @@ namespace boot{
 	class Main{
 	public:
 		static int main(int argc, char *argv[]){
+
 			server_side::Server* server = new MySerialServer();
 			CacheManager<string,string> *cacheManager = new FileCacheManager<string,string>();
             cacheManager->saveSolution("something", "asfdgrsfasd");
