@@ -10,6 +10,7 @@
 using namespace server_side;
 
 MySerialServer::~MySerialServer() {
+
 }
 
 void MySerialServer::stop() {
@@ -44,10 +45,12 @@ void MySerialServer::open(int port, ClientHandler* clientHandler){
         cout << "Server is now listening ..." << endl;
     }
 
+    // timeout of 2 minutes
+    /*struct timeval tv;
+    tv.tv_sec = 120;
+    setsockopt(socketfd, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof tv);*/
+
     while (!_stop){
-        struct timeval tv;
-        tv.tv_sec = 120;
-        setsockopt(socketfd, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof tv);
         // accepting a client
         int client_socket = accept(socketfd, (struct sockaddr *) &address,
                                    (socklen_t *) &address);
@@ -55,6 +58,15 @@ void MySerialServer::open(int port, ClientHandler* clientHandler){
             cerr << "Error accepting client" << endl;
             exit(1);
         }
+        // connect to server
+        /*int is_connect = 0;
+        is_connect = connect(client_socket, (struct sockaddr *) &address, sizeof(address));
+        if (is_connect == -1) {
+            cerr << "Could not connect" << endl;
+            exit(1);
+        }
+        cout << "Client is now connected to server" << endl;*/
+
         clientHandler->handleClient(client_socket);
     }
 }

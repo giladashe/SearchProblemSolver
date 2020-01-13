@@ -5,7 +5,7 @@ using namespace std;
 int main()
 {
 	CacheManager<const char*, const char*> *cacheManager = new FileCacheManager<const char*, const char*>();
-//	Solver<int,int>* solver = new StringReverser<int,int>();
+	//Solver<int,int>* solver = new StringReverser<int,int>();
 	cacheManager->saveSolution("1", "2");
 	cacheManager->saveSolution("3","4");
 	cacheManager->saveSolution("5", "6");

@@ -10,40 +10,46 @@
 #include "Solver.h"
 #include <iostream>
 #include <unistd.h>
+#include <netinet/in.h>
+#include <algorithm>
+#include <arpa/inet.h>
 
 
 template<class Problem, class Solution>
 class MyTestClientHandler: public ClientHandler {
-    Solver<Problem, Solution> _solver;
+    Solver<Problem, Solution>* _solver;
     CacheManager<Problem, Solution> *_cm;
 public:
-    MyTestClientHandler(Solver<Problem, Solution> solver, CacheManager<Problem, Solution> *cm) {
+    MyTestClientHandler(Solver<Problem, Solution>* solver, CacheManager<Problem, Solution> *cm) {
         this->_solver = solver;
         this->_cm = cm;
     }
 
     virtual void handleClient(int clientSocket) {
         // initialize buffer to 0
-        char buffer[1187] = {0};
+        char buffer[1024] = {0};
         string between_lines;
 
         // read
-        int readData = read(clientSocket, buffer, 1187);
+        int readData = read(clientSocket, buffer, 1024);
         int i = 0;
         while (i < readData) {
-            if (buffer[i] == '\n') {
+            if (between_lines == "end"){
+                close(clientSocket);
+            }
+            if (i == 6) {
                 if (this->_cm->hasSolution(between_lines)) {
                     int is_sent = send(clientSocket, this->_cm->getSolution(between_lines).c_str(),
-                                       this->_cm->getSolution(between_lines).c_str().length(), 0);
+                                       this->_cm->getSolution(between_lines).length(), 0);
                     if (is_sent == -1) {
                         cout << "Error sending message" << endl;
                     }
                 }
                 else{
-                    Solution solution = this->_solver.solve(between_lines);
-                    this->_cm->saveSolution(solution);
+                    Solution solution = this->_solver->solve(between_lines);
+                    this->_cm->saveSolution(between_lines, solution);
                     int is_sent = send(clientSocket, this->_cm->getSolution(between_lines).c_str(),
-                                       this->_cm->getSolution(between_lines).c_str().length(), 0);
+                                       this->_cm->getSolution(between_lines).length(), 0);
                     if (is_sent == -1) {
                         cout << "Error sending message" << endl;
                     }
