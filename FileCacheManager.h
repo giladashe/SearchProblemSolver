@@ -29,7 +29,7 @@ public:
 			throw "already exists";
 		}
 		ofStream1.open(problem, ios::binary);
-		ofStream1.write((char *) &solution, sizeof(solution));
+		ofStream1<<solution;
 		ofStream1.close();
 
 		//change LRU because size is too big
@@ -63,7 +63,7 @@ public:
 				throw "error opening file";
 			}
 			Solution solution;
-			ifStream1.read((char *) &solution, sizeof(solution));
+			ifStream1>>solution;
 			if (this->cache.size() == (unsigned) this->size) {
 				auto last = this->lru.back();
 				this->lru.pop_back();

@@ -1,23 +1,31 @@
 #include <iostream>
 #include "FileCacheManager.h"
 #include "StringReverser.h"
-using namespace std;
-int main()
-{
-	CacheManager<const char*, const char*> *cacheManager = new FileCacheManager<const char*, const char*>();
-	//Solver<int,int>* solver = new StringReverser<int,int>();
-	cacheManager->saveSolution("1", "2");
-	cacheManager->saveSolution("3","4");
-	cacheManager->saveSolution("5", "6");
-	cacheManager->saveSolution("7", "8");
-	cacheManager->saveSolution("9", "10");
-	cacheManager->saveSolution("11", "12");
 
-	const char* solution;
-	if (cacheManager->hasSolution("1")) {
-		solution = cacheManager->getSolution("1");
+using namespace std;
+
+int main() {
+	CacheManager<string, string> *cacheManager = new FileCacheManager<string, string>();
+	Solver<string, string> *solver = new StringReverser<string, string>();
+	cacheManager->saveSolution("abc", "cba");
+	cacheManager->saveSolution("that", "taht");
+	cacheManager->saveSolution("567", "765");
+	cacheManager->saveSolution("just", "tsuj");
+	cacheManager->saveSolution("run", "nur");
+	cacheManager->saveSolution("lsd", "dls");
+
+	string solution;
+	if (cacheManager->hasSolution("abc")) {
+		solution = cacheManager->getSolution("abc");
 	} else {
-	//	solution = solver->solve(3);
+		solution = solver->solve("abc");
+	}
+
+	if (cacheManager->hasSolution("what's going on?, fine!")) {
+		solution = cacheManager->getSolution("what's going on?, fine!");
+	} else {
+		solution = solver->solve("what's going on?, fine!");
+		cacheManager->saveSolution("what's going on?, fine!", solution);
 	}
 	return 0;
 }
