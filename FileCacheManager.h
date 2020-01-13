@@ -23,12 +23,17 @@ public:
 		if (objIter != this->cache.end()) {
 			throw "already in map";
 		}
-		ofstream ofStream1;
+
+		//making hash of the string so it won't be long
+		hash<string> myHash;
+		int hashForFile = myHash(problem);
+
 		//obj in disk
-		if (fileExists(problem)) {
+		if (fileExists(to_string(hashForFile))) {
 			throw "already exists";
 		}
-		ofStream1.open(problem, ios::binary);
+		ofstream ofStream1;
+		ofStream1.open(to_string(hashForFile), ios::binary);
 		ofStream1<<solution;
 		ofStream1.close();
 
@@ -48,17 +53,16 @@ public:
 		auto objIter = this->cache.find(problem);
 		//obj not in cache
 		if (objIter == this->cache.end()) {
-			ifstream ifStream1;
+
+			//check hash of string - name of the file
 			hash<string> myHash;
-
-			// Using operator() to get hash value
-
 			int hashForFile = myHash(problem);
 
-			if (!fileExists(problem)) {
+			if (!fileExists(to_string(hashForFile))) {
 				throw "an error";
 			}
-			ifStream1.open(problem, ios::binary);
+			ifstream ifStream1;
+			ifStream1.open(to_string(hashForFile), ios::binary);
 			if (!ifStream1.is_open()) {
 				throw "error opening file";
 			}
@@ -86,9 +90,12 @@ public:
 		auto objIter = this->cache.find(problem);
 		//obj not in map of cache
 		if (objIter == this->cache.end()) {
-			ofstream ofStream1;
-			//obj in disk
-			if (!this->fileExists(problem)) {
+			//check hash of string - name of the file
+			hash<string> myHash;
+			int hashForFile = myHash(problem);
+
+			//obj not in disk
+			if (!fileExists(to_string(hashForFile))) {
 				return false;
 			}
 		}
