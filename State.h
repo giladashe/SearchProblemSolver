@@ -1,12 +1,31 @@
-//
-// Created by giladasher on 13/01/2020.
-//
 
 #ifndef SEARCHPROBLEMSOLVER_STATE_H
 #define SEARCHPROBLEMSOLVER_STATE_H
 
-template<class T>
+#include <string>
+
+using namespace std;
+
+template<class Problem>
 class State {
+	pair<int, int> _state;
+	double _cost;
+	State<Problem> _cameFrom = nullptr;
+public:
+
+	State(const pair<int, int> &state, double cost) : _state(state), _cost(cost) {}
+
+	const pair<int, int> &getState() const {
+		return _state;
+	}
+
+	double getCost() const {
+		return _cost;
+	}
+
+	void setCameFrom(const State<Problem> &cameFrom) {
+		this->_cameFrom = cameFrom;
+	}
 
 };
 

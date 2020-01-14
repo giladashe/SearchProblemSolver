@@ -10,13 +10,15 @@
 
 using namespace std;
 
-template<class T>
+template<class Problem>
 class Searchable {
-	virtual State<T> getInitialState() = 0;
 
-	virtual bool isGoalState(State<T>) = 0;
+public:
+	virtual State<Problem> getInitialState() = 0;
 
-	virtual vector<State<T>> getAllPossibleStates() = 0;
+	virtual bool isGoalState(State<Problem>) = 0;
+
+	virtual vector<State<Problem>> getAllPossibleStates() = 0;
 
 };
 

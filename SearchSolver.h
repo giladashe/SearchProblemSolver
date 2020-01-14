@@ -6,10 +6,19 @@
 #define SEARCHPROBLEMSOLVER_SEARCHSOLVER_H
 
 #include "Solver.h"
+#include "Searcher.h"
 
 template<class Problem, class Solution>
 class SearchSolver : public Solver<Problem, Solution> {
-	//Searcher<>
+	Searcher<Problem, Solution> *searcher;
+
+public:
+	SearchSolver(Searcher<Problem, Solution> *searcher) : searcher(searcher) {};
+
+	Solution solve(Problem problem) override {
+		return this->searcher->search(problem);
+	}
+
 };
 
 
