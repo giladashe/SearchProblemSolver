@@ -10,7 +10,7 @@ template<class Problem>
 class State {
 	pair<int, int> _state;
 	double _cost;
-	State<Problem> _cameFrom = nullptr;
+	State<Problem> *_cameFrom = nullptr;
 public:
 
 	State(const pair<int, int> &state, double cost) : _state(state), _cost(cost) {}
@@ -25,6 +25,10 @@ public:
 
 	void setCameFrom(const State<Problem> &cameFrom) {
 		this->_cameFrom = cameFrom;
+	}
+
+	bool operator==(const State<Problem> &other) {
+		return this->_state == other.getState() && this->_cost == other.getCost();
 	}
 
 };
