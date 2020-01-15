@@ -20,6 +20,17 @@ public:
 	void increaseNumOfNodes() {
 		this->_numOfNodes++;
 	};
+
+	void initialize(Searchable<Problem> *searchable) {
+		for (auto vectorState:searchable->getStates()) {
+			for (auto state:vectorState) {
+				state->setDistanceFromSource(numeric_limits<int>::max());
+				state->setColor(WHITE);
+				state->setCameFrom(nullptr);
+			}
+
+		}
+	}
 };
 
 #endif //SEARCHPROBLEMSOLVER_SEARCHER_H

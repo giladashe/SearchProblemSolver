@@ -14,20 +14,11 @@
 
 template<class Problem, class Solution>
 class BFS : public Searcher<Problem, Solution> {
-	void initialize(Searchable<Problem> *searchable) {
-		for (auto vectorState:searchable->getStates()) {
-			for (auto state:vectorState) {
-				state->setDistanceFromSource(numeric_limits<int>::max());
-				state->setColor(WHITE);
-				state->setCameFrom(nullptr);
-			}
 
-		}
-	}
 
 public:
 	Solution search(Searchable<Problem> *searchable) override {
-		initialize(searchable);
+		Searcher<Problem, Solution>::initialize(searchable);
 		State<Problem> *goalState = nullptr;
 		searchable->getInitialState()->setDistanceFromSource(0);
 		searchable->getInitialState()->setColor(GRAY);
@@ -45,6 +36,12 @@ public:
 					Searcher<Problem, Solution>::increaseNumOfNodes();
 					if (searchable->isGoalState(state)) {
 						goalState = state;
+
+						while (!myQueue.empty()) {
+							myQueue.pop();
+						}
+
+						break;
 					}
 				}
 			}
@@ -81,10 +78,10 @@ public:
 
 			thisState = previous;
 		}
-			return solution;
-		}
+		return solution;
+	}
 
 
-	};
+};
 
 #endif //SEARCHPROBLEMSOLVER_BFS_H
