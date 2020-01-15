@@ -9,14 +9,16 @@
 
 template<class Problem, class Solution>
 class Searcher {
-	int numOfNodes = 0;
+	int _numOfNodes = 0;
 public:
 	virtual Solution search(Searchable<Problem> *searchable) = 0;
 
-	virtual int getNumberOfNodesEvaluated() = 0;
+	int getNumberOfNodesEvaluated() {
+		return _numOfNodes;
+	};
 
 	void increaseNumOfNodes() {
-		this->numOfNodes++;
+		this->_numOfNodes++;
 	};
 };
 

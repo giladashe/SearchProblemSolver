@@ -10,11 +10,11 @@
 
 template<class Problem>
 class Matrix : public Searchable<Problem> {
-	vector<vector<State<Problem>>> _states;
-	State<Problem> _initialState;
-	vector<State<Problem>> _goalStates;
-	int _rows;
-	int _columns;
+	vector<vector<State<Problem> *>> _states;
+	State<Problem> *_initialState;
+	vector<State<Problem> *> _goalStates;
+	int _rows = 0;
+	int _columns = 0;
 
 	bool inRange(int i, int j) {
 		return i >= 0 && i < _rows && j >= 0 && j < _columns;
@@ -43,21 +43,21 @@ public:
 		bool hasInitial = false;
 		int first = 0;
 		int second = 0;
-		int rows = 0;
 		vector<string> splitLines = Matrix::splitByDelimiter(matrixStr, "\n");
 		vector<string> splitByComma;
 		for (auto &splitLine : splitLines) {
 			splitLine.erase(remove(splitLine.begin(), splitLine.end(), ' '), splitLine.end());
 			splitLine.erase(remove(splitLine.begin(), splitLine.end(), '\t'), splitLine.end());
 			splitByComma = Matrix::splitByDelimiter(splitLine, ",");
-			if (!hasCols && !splitByComma.empty()) {
+			if (splitByComma.empty()) {
+				continue;
+			}
+			if (!hasCols) {
 				this->_columns = splitByComma.size();
 				hasCols = true;
-			} else if (splitByComma.size() != this->_columns) {
-				if (splitByComma.empty()) {
-					continue;
-				} else if (!hasInitial) {
-					this->_rows = rows;
+			}
+			if (splitByComma.size() != this->_columns) {
+				if (!hasInitial) {
 					//todo initial
 					first = stoi(splitByComma[0]);
 					second = stoi(splitByComma[1]);
@@ -72,27 +72,28 @@ public:
 				}
 			} else {
 				//todo put in vector - it's a line
-				vector<State<Problem>> rowStates;
+				vector<State<Problem> *> rowStates;
 				int row = this->_rows;
 				for (int j = 0; j < this->_columns; j++) {
-					State<Problem> state(make_pair(row,j),stoi(splitByComma[j]));
+					auto* state = new State<Problem>(make_pair(row, j), stoi(splitByComma[j]));
 					rowStates.push_back(state);
 				}
 				this->_states.push_back(rowStates);
-				rows++;
+				this->_rows++;
 			}
 			splitByComma.clear();
 		}
+
 	}
 
-	State<Problem> getInitialState() override {
+	State<Problem> *getInitialState() override {
 		return this->_initialState;
 	}
 
-	bool isGoalState(State<Problem> state) override {
+	bool isGoalState(const State<Problem> *state) override {
 		bool isGoal = false;
 		for (auto &currentState:_goalStates) {
-			//todo override ==
+			//they both point on goal
 			if (currentState == state) {
 				isGoal = true;
 			}
@@ -100,9 +101,30 @@ public:
 		return isGoal;
 	}
 
-	vector<State<Problem>> getAllPossibleStates() override {
+	vector<State<Problem> *> getAllPossibleStates(State<Problem> *state) override {
 		//todo this function using "in range"
-		return vector<State<Problem>>();
+		vector<State<Problem> *> possibleStates;
+		int stateX = state->getState().first;
+		int stateY = state->getState().second;
+		int counterX = stateX - 1;
+		int counterY = stateY;
+		if (this->inRange(stateX - 1, stateY)) {
+			possibleStates.push_back(_states[stateX - 1][stateY]);
+		}
+		if (this->inRange(stateX, stateY - 1)) {
+			possibleStates.push_back(_states[stateX][stateY - 1]);
+		}
+		if (this->inRange(stateX, stateY + 1)) {
+			possibleStates.push_back(_states[stateX][stateY + 1]);
+		}
+		if (this->inRange(stateX + 1, stateY)) {
+			possibleStates.push_back(_states[stateX + 1][stateY]);
+		}
+		return possibleStates;
+	}
+
+	vector<vector<State<Problem> *>>  getStates() override {
+		return _states;
 	}
 
 

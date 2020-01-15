@@ -18,22 +18,22 @@ class FileCacheManager : public CacheManager<Problem, Solution> {
 public:
 
 	void saveSolution(Problem problem, Solution solution) override {
-		auto objIter = this->cache.find(problem);
+		//making hash of the string so it won't be long
+		hash<Problem> myHash;
+		int hashForFile = myHash(problem);
+		string hashStr = to_string(hashForFile);
+		auto objIter = this->cache.find(hashStr);
 		//obj not in cache
 		if (objIter != this->cache.end()) {
 			throw "already in map";
 		}
-
-		//making hash of the string so it won't be long
-		hash<string> myHash;
-		int hashForFile = myHash(problem);
 
 		//obj in disk
 		if (fileExists(to_string(hashForFile))) {
 			throw "already exists";
 		}
 		ofstream ofStream1;
-		ofStream1.open(to_string(hashForFile), ios::binary);
+		ofStream1.open(hashStr, ios::binary);
 		ofStream1<<solution;
 		ofStream1.close();
 
@@ -44,7 +44,7 @@ public:
 			this->cache.erase(last);
 		}
 		//insert to cache and lru
-		this->lru.push_front(problem);
+		this->lru.push_front(hashStr);
 		this->cache.insert(make_pair(problem, make_pair(solution, this->lru.begin())));
 	}
 

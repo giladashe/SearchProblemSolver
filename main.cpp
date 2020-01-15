@@ -2,7 +2,7 @@
 #include "FileCacheManager.h"
 #include "StringReverser.h"
 #include "Matrix.h"
-
+#include "BFS.h"
 using namespace std;
 
 int main() {
@@ -73,6 +73,8 @@ int main() {
 				 "0,0\n"
 				 "36,36\n";
 	Searchable<string> *searchable = new Matrix<string>(str);
-
+	Searcher<string,string>* searcher = new BFS<string,string>();
+	string solution = searcher->search(searchable);
+	int numOfNodesBFS = searcher->getNumberOfNodesEvaluated();
 	return 0;
 }

@@ -14,11 +14,13 @@ template<class Problem>
 class Searchable {
 
 public:
-	virtual State<Problem> getInitialState() = 0;
+	virtual State<Problem>* getInitialState() = 0;
 
-	virtual bool isGoalState(State<Problem>) = 0;
+	virtual bool isGoalState(const State<Problem>* state) = 0;
 
-	virtual vector<State<Problem>> getAllPossibleStates() = 0;
+	virtual vector<State<Problem>*> getAllPossibleStates(State<Problem> *state) = 0;
+
+	virtual vector<vector<State<Problem>*>> getStates()=0;
 
 };
 
