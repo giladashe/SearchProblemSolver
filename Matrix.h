@@ -104,8 +104,8 @@ public:
 	vector<State<Problem> *> getAllPossibleStates(State<Problem> *state) override {
 		//todo this function using "in range"
 		vector<State<Problem> *> possibleStates;
-		int stateX = state->getState().first;
-		int stateY = state->getState().second;
+		int stateX = state->getLocation().first;
+		int stateY = state->getLocation().second;
 		int counterX = stateX - 1;
 		int counterY = stateY;
 		if (this->inRange(stateX - 1, stateY)) {

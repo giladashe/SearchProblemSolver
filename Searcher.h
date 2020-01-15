@@ -10,6 +10,9 @@
 template<class Problem, class Solution>
 class Searcher {
 	int _numOfNodes = 0;
+	enum Color {
+		white = 1, gray, black
+	};
 public:
 	virtual Solution search(Searchable<Problem> *searchable) = 0;
 
@@ -31,17 +34,19 @@ protected:
 
 		}
 	}
-	string printPath(State<Problem>* goalState){
+
+	string makePath(State<Problem> *goalState) {
 		string solution;
-		State<Problem>* thisState = goalState;
+		State<Problem> *thisState = goalState;
+		list<pair<int, int>> list;
 		while (thisState != nullptr && thisState->getCameFrom() != nullptr) {
 			State<Problem> *previous = thisState->getCameFrom();
 			string toAppend = " (" + to_string(thisState->getDistanceFromSource()) + ")";
 			string direction;
-			int yCurrent = thisState->getState().second;
-			int xCurrent = thisState->getState().first;
-			int xPrevious = previous->getState().first;
-			int yPrevious = previous->getState().second;
+			int yCurrent = thisState->getLocation().second;
+			int xCurrent = thisState->getLocation().first;
+			int xPrevious = previous->getLocation().first;
+			int yPrevious = previous->getLocation().second;
 
 			if (yPrevious < yCurrent) {
 				direction = ", Right";

@@ -11,7 +11,7 @@ using namespace std;
 
 template<class Problem>
 class State {
-	pair<int, int> _state;
+	pair<int, int> _location;
 	double _cost = 0;
 	int _color = WHITE;
 	int _distanceFromSource = numeric_limits<int>::max();
@@ -20,10 +20,10 @@ public:
 
 	State<Problem>() = default;
 
-	State<Problem>(const pair<int, int> &state, double cost) : _state(state), _cost(cost) {}
+	State<Problem>(const pair<int, int> &state, double cost) : _location(state), _cost(cost) {}
 
-	const pair<int, int> &getState() const {
-		return _state;
+	const pair<int, int> &getLocation() const {
+		return _location;
 	}
 
 	double getCost() const {
