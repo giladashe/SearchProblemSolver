@@ -22,7 +22,7 @@ public:
 		};
 		searchable->getInitialState()->setDistanceFromSource(0);
 		searchable->getInitialState()->setColor(gray);
-		queue < State<Problem>*> myQueue;
+		queue <State<Problem>*> myQueue;
 		myQueue.push(searchable->getInitialState());
 		while (!myQueue.empty() && !reachedGoal) {
 			State<Problem> *currentState = myQueue.front();
@@ -30,7 +30,7 @@ public:
 			for (auto state: searchable->getAllPossibleStates(currentState)) {
 				if (state->getCost() != -1 && state->getColor() == white) {
 					state->setColor(gray);
-					state->setDistanceFromSource(currentState->getDistanceFromSource() + 1);
+					state->setDistanceFromSource(currentState->getDistanceFromSource() + state->getCost());
 					state->setCameFrom(currentState);
 					myQueue.push(state);
 					Searcher<Problem, Solution>::increaseNumOfNodes();

@@ -10,9 +10,6 @@
 template<class Problem, class Solution>
 class Searcher {
 	int _numOfNodes = 0;
-	enum Color {
-		white = 1, gray, black
-	};
 public:
 	virtual Solution search(Searchable<Problem> *searchable) = 0;
 
