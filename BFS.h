@@ -48,37 +48,8 @@ public:
 			currentState->setColor(BLACK);
 		}
 
-		string solution;
 		State<Problem> *thisState = goalState;
-		while (thisState != nullptr && thisState->getCameFrom() != nullptr) {
-			State<Problem> *previous = thisState->getCameFrom();
-			string toAppend = " (" + to_string(thisState->getDistanceFromSource()) + ")";
-			string direction;
-			int yCurrent = thisState->getState().second;
-			int xCurrent = thisState->getState().first;
-			int xPrevious = previous->getState().first;
-			int yPrevious = previous->getState().second;
-
-			if (yPrevious < yCurrent) {
-				direction = ", Right";
-			} else if (yPrevious == yCurrent) {
-				if (xPrevious < xCurrent) {
-					direction = ", Down";
-				} else {
-					direction = ", Up";
-				}
-			} else {
-				direction = ", Left";
-			}
-			if (previous->getCameFrom() == nullptr) {
-				direction.erase(direction.begin(), direction.begin() + 2);
-			}
-			solution.insert(0, toAppend);
-			solution.insert(0, direction);
-
-			thisState = previous;
-		}
-		return solution;
+		return Searcher<Problem,Solution>::printPath(goalState);
 	}
 
 

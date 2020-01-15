@@ -13,7 +13,7 @@ class DFS : public Searcher<Problem, Solution> {
 public:
 	Solution search(Searchable<Problem> *searchable) override {
 		stack<Problem> myStack;
-
+		Searcher<Problem, Solution>::initialize(searchable);
 		/*
 		stack.push(root)
 		while !stack.isEmpty()
