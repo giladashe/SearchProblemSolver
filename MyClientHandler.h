@@ -27,12 +27,12 @@ public:
 
     virtual void handleClient(int clientSocket) {
         // initialize buffer to 0
-        char buffer[1024] = {0};
+        char buffer[10000] = {0};
         string between_lines;
         string allMatrix; // with start & end points
 
         // read
-        int readData = read(clientSocket, buffer, 1024);
+        int readData = read(clientSocket, buffer, 10000);
         int i = 0;
         while (i < readData) {
             if (between_lines == "end"){
@@ -56,6 +56,7 @@ public:
             }
             if (buffer[i] == '\n'){
                 allMatrix.append(between_lines);
+                allMatrix.append("\n");
                 between_lines = "";
                 i++;
                 continue;
