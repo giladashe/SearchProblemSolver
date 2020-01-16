@@ -41,7 +41,6 @@ public:
 			}
 			stateOnTop->setColor(black);
 		}
-
 		return Searcher<Problem, Solution>::makePath(goalState);
 	}
 };

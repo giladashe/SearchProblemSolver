@@ -41,6 +41,7 @@ public:
 		//todo make matrix from str
 		bool hasCols = false;
 		bool hasInitial = false;
+		// the x,y pair of location
 		int first = 0;
 		int second = 0;
 		vector<string> splitLines = Matrix::splitByDelimiter(matrixStr, "\n");
@@ -83,7 +84,6 @@ public:
 			}
 			splitByComma.clear();
 		}
-
 	}
 
 	State<Problem> *getInitialState() override {
@@ -126,6 +126,10 @@ public:
 	vector<vector<State<Problem> *>>  getStates() override {
 		return _states;
 	}
+
+    vector<State<Problem>*> getGoalStates() override {
+        return _goalStates;
+    }
 
 
 };

@@ -28,7 +28,6 @@ protected:
 				state->setColor(WHITE);
 				state->setCameFrom(nullptr);
 			}
-
 		}
 	}
 

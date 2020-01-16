@@ -15,7 +15,7 @@ class SearchSolver : public Solver<Problem, Solution> {
 public:
 	SearchSolver(Searcher<Problem, Solution> *searcher) : searcher(searcher) {};
 
-	Solution solve(Problem problem) override {
+	Solution solve(Searchable<Problem>* problem) override {
 		return this->searcher->search(problem);
 	}
 

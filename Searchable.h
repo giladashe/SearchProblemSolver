@@ -22,6 +22,7 @@ public:
 
 	virtual vector<vector<State<Problem>*>> getStates()=0;
 
+    virtual vector<State<Problem>*> getGoalStates() = 0;
 };
 
 #endif //SEARCHPROBLEMSOLVER_SEARCHABLE_H
