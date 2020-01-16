@@ -49,38 +49,36 @@ int main() {
 				 "0,0\n"
 				 "36,36\n";
 	Searchable<string> *searchable = new Matrix<string>(str);
-	Searcher<string,string>* searcher = new BFS<string,string>();
+	Searcher<string, string> *searcher = new BFS<string, string>();
 	string solution = searcher->search(searchable);
 	int numOfNodesBFS = searcher->getNumberOfNodesEvaluated();
-	searcher = new DFS<string,string>();
+	searcher = new DFS<string, string>();
 	string solution1 = searcher->search(searchable);
 	int numOfNodesDFS = searcher->getNumberOfNodesEvaluated();
-	/*
-CacheManager<string, string> *cacheManager = new FileCacheManager<string, string>();
-Solver<string, string> *solver = new StringReverser<string, string>();
-cacheManager->saveSolution("abc", "cba");
-cacheManager->getSolution("abc");
+/*	CacheManager<string, string> *cacheManager = new FileCacheManager<string, string>();
+	Solver<string, string> *solver = new StringReverser<string, string>();
+	cacheManager->saveSolution(str, "cba");
+	string sol = cacheManager->getSolution(str);
 
-cacheManager->saveSolution("that", "taht");
-cacheManager->saveSolution("567", "765");
-cacheManager->saveSolution("just", "tsuj");
-cacheManager->saveSolution("run", "nur");
-cacheManager->saveSolution("lsd", "dls");
+	cacheManager->saveSolution("that", "taht");
+	cacheManager->saveSolution("567", "765");
+	cacheManager->saveSolution("just", "tsuj");
+	cacheManager->saveSolution("run", "nur");
+	cacheManager->saveSolution("lsd", "dls");
 
-string solution;
-if (cacheManager->hasSolution("abc")) {
-	solution = cacheManager->getSolution("abc");
-} else {
-	solution = solver->solve("abc");
-}
-cout<<solution<<endl;
-if (cacheManager->hasSolution("what's going on?, fine!")) {
-	solution = cacheManager->getSolution("what's going on?, fine!");
-} else {
-	solution = solver->solve("what's going on?, fine!");
-	cacheManager->saveSolution("what's going on?, fine!", solution);
-}
-cout<<solution<<endl;
- */
+	string solution;
+	if (cacheManager->hasSolution("abc")) {
+		solution = cacheManager->getSolution("abc");
+	} else {
+		solution = solver->solve("abc");
+	}
+	cout << solution << endl;
+	if (cacheManager->hasSolution("what's going on?, fine!")) {
+		solution = cacheManager->getSolution("what's going on?, fine!");
+	} else {
+		solution = solver->solve("what's going on?, fine!");
+		cacheManager->saveSolution("what's going on?, fine!", solution);
+	}
+	cout << solution << endl;*/
 	return 0;
 }
