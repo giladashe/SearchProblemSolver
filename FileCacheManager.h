@@ -62,12 +62,15 @@ public:
 				throw "an error";
 			}
 			ifstream ifStream1;
-			ifStream1.open(to_string(hashForFile), ios::binary);
+			ifStream1.open(hashProblemStr, ios::binary);
 			if (!ifStream1.is_open()) {
 				throw "error opening file";
 			}
 			Solution solution;
-			ifStream1 >> solution;
+			Solution line;
+			while (getline(ifStream1, line)) {
+				solution += line;
+			}
 			if (this->cache.size() == (unsigned) this->size) {
 				auto last = this->lru.back();
 				this->lru.pop_back();

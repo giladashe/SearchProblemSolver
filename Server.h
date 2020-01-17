@@ -34,6 +34,17 @@ namespace server_side {
         void open(int port, ClientHandler* c) override ;
     };
 
+	class MyParallelServer: public Server {
+		bool _stop = false;
+	public:
+		~MyParallelServer() override;
+
+		// pure virtual execute so the other commands classes will have to implement
+		void stop() override;
+
+		void open(int port, ClientHandler* c) override ;
+	};
+
 }
 
 #endif //SEARCHPROBLEMSOLVER_SERVER_H
