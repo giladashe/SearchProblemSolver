@@ -9,7 +9,7 @@
 
 
 using namespace server_side;
-
+void getFromClient(int socketFd , sockaddr_in address, ClientHandler *clientHandler);
 MyParallelServer::~MyParallelServer() {
 
 }
@@ -19,8 +19,8 @@ void MyParallelServer::stop() {
 }
 
 void MyParallelServer::open(int port, ClientHandler* clientHandler){
-	int socketfd = socket(AF_INET, SOCK_STREAM, 0);
-	if (socketfd == -1) {
+	int socketFd = socket(AF_INET, SOCK_STREAM, 0);
+	if (socketFd == -1) {
 		//error
 		cerr << "Could not create a socket" << endl;
 		exit(1);
@@ -33,33 +33,33 @@ void MyParallelServer::open(int port, ClientHandler* clientHandler){
 	address.sin_port = htons(port); //we need to convert our number to a number that the network understands.
 
 	//the actual bind command
-	if (bind(socketfd, (struct sockaddr *) &address, sizeof(address)) == -1) {
+	if (bind(socketFd, (struct sockaddr *) &address, sizeof(address)) == -1) {
 		cerr << "Could not bind the socket to an IP" << endl;
 		exit(1);
 	}
 
 	//making socket listen to the port
-	if (listen(socketfd, 5) == -1) { //can also set to SOMAXCON (max connections)
+	if (listen(socketFd, 5) == -1) { //can also set to SOMAXCON (max connections)
 		cerr << "Error during listening command" << endl;
 		exit(1);
 	} else {
 		cout << "Server is now listening ..." << endl;
 	}
 
-	// timeout of 2 minutes
-	/*struct timeval tv;
-	tv.tv_sec = 120;
-	setsockopt(socketfd, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof tv);*/
-
 	while (!_stop){
 		// accepting a client
-	//	thread acceptClient(getFromClient, socketfd,address, clientHandler);
+		thread acceptClient(getFromClient, socketFd,address, clientHandler);
+		acceptClient.detach();
 
 	}
 }
 
-void getFromClient(int socketfd ,sockaddr_in address,ClientHandler *clientHandler) {
-	int client_socket = accept(socketfd, (struct sockaddr *) &address,
+void getFromClient(int socketFd , sockaddr_in address, ClientHandler *clientHandler) {
+	// timeout of 2 minutes
+	struct timeval tv{};
+	tv.tv_sec = 120;
+	setsockopt(socketFd, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof tv);
+	int client_socket = accept(socketFd, (struct sockaddr *) &address,
 							   (socklen_t *) &address);
 	if (client_socket == -1) {
 		cerr << "Error accepting client" << endl;
