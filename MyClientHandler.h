@@ -66,7 +66,7 @@ public:
                 }
                 between_lines += buffer[i];
                 i++;
-            }
+            }//
         }
     }
 };
