@@ -56,6 +56,7 @@ public:
                         }
                     }
                     close(clientSocket);
+                    break;
                 }
                 if (buffer[i] == '\n'){
                     allMatrix.append(between_lines);
