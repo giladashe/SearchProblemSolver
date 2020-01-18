@@ -63,6 +63,10 @@ protected:
 
 			thisState = previous;
 		}
+		solution.insert(0, "\n");
+		solution.insert(0, to_string(this->_numOfNodes));
+		solution.insert(0, "number of nodes: ");
+		this->_numOfNodes = 0;
 		return solution;
 	}
 

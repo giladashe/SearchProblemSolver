@@ -16,8 +16,9 @@ public:
         enum Color {
             white = 1, gray, black
         };
-        searchable->getInitialState()->setDistanceFromSource(0);
-        searchable->getInitialState()->setColor(gray);
+		State<Problem>* initialState = searchable->getInitialState();
+		initialState->setDistanceFromSource(initialState->getCost());
+		initialState->setColor(gray);
         priority_queue<State<Problem>*, vector<State<Problem>*>, greater<typename vector<State<Problem>*>::value_type>> pqueue_greater;//
         pqueue_greater.push(searchable->getInitialState());
         while (!pqueue_greater.empty() && !reachedGoal) {

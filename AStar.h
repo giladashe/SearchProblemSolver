@@ -20,7 +20,7 @@ public:
             white = 1, black
         };
         State<Problem>* initialState = searchable->getInitialState();
-        initialState->setDistanceFromSource(0);
+        initialState->setDistanceFromSource(initialState->getCost());
         // priority queue by minimal f = DistanceFromSource + h
         priority_queue<State<Problem>*, vector<State<Problem>*>, FCompare> pqueue_F;//
         pqueue_F.push(initialState);

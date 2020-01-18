@@ -14,11 +14,12 @@ public:
 	Solution search(Searchable<Problem> *searchable) override {
 		stack < State<Problem> * > myStack;
 		Searcher<Problem, Solution>::initialize(searchable);
-		searchable->getInitialState()->setDistanceFromSource(0);
+		State<Problem> * initial = searchable->getInitialState();
+		initial->setDistanceFromSource(initial->getCost());
 		enum Color {
 			white = 1, gray, black
 		};
-		searchable->getInitialState()->setColor(gray);
+		initial->setColor(gray);
 		myStack.push(searchable->getInitialState());
 		bool reachedGoal = false;
 		State<Problem> *goalState = nullptr;

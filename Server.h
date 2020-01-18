@@ -20,27 +20,17 @@ namespace server_side {
 
         virtual ~Server(){}
 
-        virtual void stop() = 0;
-
     };
     class MySerialServer: public Server {
-        bool _stop = false;
     public:
         ~MySerialServer() override;
-
-        // pure virtual execute so the other commands classes will have to implement
-        void stop() override;
 
         void open(int port, ClientHandler* c) override ;
     };
 
 	class MyParallelServer: public Server {
-		bool _stop = false;
 	public:
 		~MyParallelServer() override;
-
-		// pure virtual execute so the other commands classes will have to implement
-		void stop() override;
 
 		void open(int port, ClientHandler* c) override ;
 	};

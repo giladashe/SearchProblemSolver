@@ -16,10 +16,6 @@ MyParallelServer::~MyParallelServer() {
 
 }
 
-void MyParallelServer::stop() {
-	this->_stop = true;
-}
-
 void MyParallelServer::open(int port, ClientHandler *clientHandler) {
 	int socketFd = socket(AF_INET, SOCK_STREAM, 0);
 	if (socketFd == -1) {
@@ -47,30 +43,26 @@ void MyParallelServer::open(int port, ClientHandler *clientHandler) {
 	} else {
 		cout << "Server is now listening ..." << endl;
 	}
-
-	while (!_stop) {
+	struct timeval tv{};
+	tv.tv_sec = 120;
+	setsockopt(socketFd, SOL_SOCKET, SO_RCVTIMEO, (const char *) &tv, sizeof tv);
+	while (true) {
 		// accepting a client
-		struct timeval tv{};
-		tv.tv_sec = 120;
-		setsockopt(socketFd, SOL_SOCKET, SO_RCVTIMEO, (const char *) &tv, sizeof tv);
+
 		int client_socket = accept(socketFd, (struct sockaddr *) &address,
 								   (socklen_t *) &address);
+
 		if (client_socket == -1) {
+			//if had timeout finish the loop
+			if (errno == EWOULDBLOCK) {
+				cout << "timeout!" << endl;
+				break;
+			}
 			cerr << "Error accepting client" << endl;
 			exit(1);
 		}
-		// connect to server
-		int is_connect = 0;
-		is_connect = connect(client_socket, (struct sockaddr *) &address, sizeof(address));
-		if (is_connect == -1) {
-			cerr << "Could not connect" << endl;
-			exit(1);
-		}
-		cout << "Client is now connected to server" << endl;
-		//thread acceptClient(getFromClient, client_socket, clientHandler);
-		//acceptClient.detach();
-		getFromClient(client_socket,clientHandler);
-
+		thread acceptClient(getFromClient, client_socket, clientHandler);
+		acceptClient.detach();
 	}
 }
 

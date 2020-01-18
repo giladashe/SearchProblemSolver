@@ -70,10 +70,10 @@ int main(int argc, char *argv[]) {
 				 "0,0\n"
 				 "36,36\n";
 
-	Searcher<string, string> *dfs = new DFS<string, string>();
+	Searcher<string, string> *dfs = new BestFirstSearch<string, string>();
 	Solver<string, string> *solver = new SearchSolver<string, string>(dfs);
 	string solution = solver->solve(str);
-	Server *server = new MyParallelServer();
+	Server *server = new MySerialServer();
 	CacheManager<string, string> *cacheManager = new FileCacheManager<string, string>();
 	// arguments to MyTestClientHandler
 	ClientHandler *clientHandler = new MyClientHandler<string, string>(solver, cacheManager);

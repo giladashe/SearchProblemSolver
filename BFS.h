@@ -20,7 +20,8 @@ public:
 		enum Color {
 			white = 1, gray, black
 		};
-		searchable->getInitialState()->setDistanceFromSource(0);
+		State<Problem> * initial = searchable->getInitialState();
+		initial->setDistanceFromSource(initial->getCost());
 		searchable->getInitialState()->setColor(gray);
 		queue <State<Problem>*> myQueue;
 		myQueue.push(searchable->getInitialState());
