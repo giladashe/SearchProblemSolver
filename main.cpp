@@ -30,7 +30,7 @@ void openServer(Server *server, int port, ClientHandler *clientHandler);
 
 int main(int argc, char *argv[]) {
 
-	string str = "8,2 ,8,6 ,8 ,2 ,12,2 ,4 ,1,9,9,5,12,1,1,1,2,7,3,1,6,9,3,9,7,7,9,5,6,4,5,1,6,-1,1,7\n"
+	string str = "8,2 9,8,6 ,8 ,2 ,12,2 ,4 ,1,9,9,5,12,1,1,1,2,7,3,1,6,9,3,9,7,7,9,5,6,4,5,1,6,-1,1,7\n"
 				 "4,12,2,3 ,2 ,5 ,2 ,1 ,12,2,4,5,4,3,3,4,12,2,3,9,6,9,1,6,7,7,5,8,7,2,-1,3,2,5,-1,9,2\n"
 				 "1, 5,8,9 ,2 ,1 ,2 ,4 ,7,8,2,9,8,4, 2, 2,12, 8, 8, 2, 3, 3, 1, 5,12,-1, 2, 7, 1, 4,-1,-1,-1, 2,-1, 5, 6\n"
 				 "8, 6,2,4 ,12,8 ,9 ,9 ,7,1,2,8,8,2, 4, 2, 1, 7, 6, 8, 3,-1, 8, 1, 8, 6, 1, 3, 3, 2, 7, 3, 4, 2, 9,12, 2\n"
@@ -73,7 +73,7 @@ int main(int argc, char *argv[]) {
 	Searcher<string, string> *dfs = new DFS<string, string>();
 	Solver<string, string> *solver = new SearchSolver<string, string>(dfs);
 	string solution = solver->solve(str);
-	Server *server = new MySerialServer();
+	Server *server = new MyParallelServer();
 	CacheManager<string, string> *cacheManager = new FileCacheManager<string, string>();
 	// arguments to MyTestClientHandler
 	ClientHandler *clientHandler = new MyClientHandler<string, string>(solver, cacheManager);

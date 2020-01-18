@@ -9,7 +9,9 @@
 
 
 using namespace server_side;
-void getFromClient(int socketFd , sockaddr_in address, ClientHandler *clientHandler);
+
+void getFromClient(int client_socket, ClientHandler *clientHandler);
+
 MyParallelServer::~MyParallelServer() {
 
 }
@@ -18,7 +20,7 @@ void MyParallelServer::stop() {
 	this->_stop = true;
 }
 
-void MyParallelServer::open(int port, ClientHandler* clientHandler){
+void MyParallelServer::open(int port, ClientHandler *clientHandler) {
 	int socketFd = socket(AF_INET, SOCK_STREAM, 0);
 	if (socketFd == -1) {
 		//error
@@ -46,33 +48,33 @@ void MyParallelServer::open(int port, ClientHandler* clientHandler){
 		cout << "Server is now listening ..." << endl;
 	}
 
-	while (!_stop){
+	while (!_stop) {
 		// accepting a client
-		thread acceptClient(getFromClient, socketFd,address, clientHandler);
-		acceptClient.detach();
+		struct timeval tv{};
+		tv.tv_sec = 120;
+		setsockopt(socketFd, SOL_SOCKET, SO_RCVTIMEO, (const char *) &tv, sizeof tv);
+		int client_socket = accept(socketFd, (struct sockaddr *) &address,
+								   (socklen_t *) &address);
+		if (client_socket == -1) {
+			cerr << "Error accepting client" << endl;
+			exit(1);
+		}
+		// connect to server
+		int is_connect = 0;
+		is_connect = connect(client_socket, (struct sockaddr *) &address, sizeof(address));
+		if (is_connect == -1) {
+			cerr << "Could not connect" << endl;
+			exit(1);
+		}
+		cout << "Client is now connected to server" << endl;
+		//thread acceptClient(getFromClient, client_socket, clientHandler);
+		//acceptClient.detach();
+		getFromClient(client_socket,clientHandler);
 
 	}
 }
 
-void getFromClient(int socketFd , sockaddr_in address, ClientHandler *clientHandler) {
-	// timeout of 2 minutes
-	struct timeval tv{};
-	tv.tv_sec = 120;
-	setsockopt(socketFd, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof tv);
-	int client_socket = accept(socketFd, (struct sockaddr *) &address,
-							   (socklen_t *) &address);
-	if (client_socket == -1) {
-		cerr << "Error accepting client" << endl;
-		exit(1);
-	}
-	// connect to server
-	int is_connect = 0;
-	is_connect = connect(client_socket, (struct sockaddr *) &address, sizeof(address));
-	if (is_connect == -1) {
-		cerr << "Could not connect" << endl;
-		exit(1);
-	}
-	cout << "Client is now connected to server" << endl;
+void getFromClient(int client_socket, ClientHandler *clientHandler) {
 
 	clientHandler->handleClient(client_socket);
 }
