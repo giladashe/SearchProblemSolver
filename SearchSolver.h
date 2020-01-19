@@ -20,6 +20,9 @@ public:
 		return this->searcher->search(matrix);
 	}
 
+	Solver<Problem, Solution> *clone() override {
+		return new SearchSolver<Problem, Solution>(searcher->clone());
+	}
 };
 
 

@@ -112,6 +112,10 @@ public:
 		return (bool) iFile;
 	}
 
+	CacheManager<Problem, Solution> *clone() override {
+		return new FileCacheManager<Problem, Solution>;
+	}
+
 };
 
 

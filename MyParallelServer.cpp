@@ -61,7 +61,7 @@ void MyParallelServer::open(int port, ClientHandler *clientHandler) {
 			cerr << "Error accepting client" << endl;
 			exit(1);
 		}
-		thread acceptClient(getFromClient, client_socket, clientHandler);
+		thread acceptClient(getFromClient, client_socket, clientHandler->clone());
 		acceptClient.detach();
 	}
 }
@@ -69,4 +69,5 @@ void MyParallelServer::open(int port, ClientHandler *clientHandler) {
 void getFromClient(int client_socket, ClientHandler *clientHandler) {
 
 	clientHandler->handleClient(client_socket);
+	//delete(clientHandler);
 }

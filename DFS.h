@@ -14,7 +14,7 @@ public:
 	Solution search(Searchable<Problem> *searchable) override {
 		stack < State<Problem> * > myStack;
 		Searcher<Problem, Solution>::initialize(searchable);
-		State<Problem> * initial = searchable->getInitialState();
+		State<Problem> *initial = searchable->getInitialState();
 		initial->setDistanceFromSource(initial->getCost());
 		enum Color {
 			white = 1, gray, black
@@ -43,6 +43,10 @@ public:
 			stateOnTop->setColor(black);
 		}
 		return Searcher<Problem, Solution>::makePath(goalState);
+	}
+
+	Searcher<Problem, Solution> *clone() override {
+		return new DFS<Problem, Solution>();
 	}
 };
 

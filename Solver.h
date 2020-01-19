@@ -6,6 +6,8 @@ class Solver {
 
 public:
 	virtual Solution solve(Problem problem) = 0;
+
+	virtual Solver<Problem,Solution> *clone() = 0;
 };
 
 

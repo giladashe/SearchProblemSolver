@@ -43,6 +43,10 @@ public:
         State<Problem> *thisState = goalState;
         return Searcher<Problem, Solution>::makePath(goalState);
 	}
+
+	Searcher<Problem, Solution> *clone() override {
+		return new BestFirstSearch<Problem, Solution>();
+	}
 };
 
 

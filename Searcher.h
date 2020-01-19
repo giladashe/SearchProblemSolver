@@ -20,6 +20,9 @@ public:
 	void increaseNumOfNodes() {
 		this->_numOfNodes++;
 	};
+
+	virtual Searcher<Problem, Solution> *clone() = 0;
+
 protected:
 	void initialize(Searchable<Problem> *searchable) {
 		for (auto vectorState:searchable->getStates()) {

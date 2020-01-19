@@ -84,6 +84,9 @@ public:
         }
     };
 
+	Searcher<Problem, Solution> *clone() override {
+		return new AStar<Problem, Solution>();
+	}
 };
 
 #endif //SEARCHPROBLEMSOLVER_ASTAR_H

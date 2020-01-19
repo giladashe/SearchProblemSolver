@@ -49,7 +49,9 @@ public:
 		return Searcher<Problem, Solution>::makePath(goalState);
 	}
 
-
+	Searcher<Problem, Solution> *clone() override {
+		return new BFS<Problem, Solution>();
+	}
 };
 
 #endif //SEARCHPROBLEMSOLVER_BFS_H
