@@ -20,7 +20,6 @@ public:
 
 	virtual bool hasSolution(Problem problem) = 0;
 
-	virtual CacheManager *clone() = 0;
 };
 
 #endif //SEARCHPROBLEMSOLVER_CACHEMANAGER_H

@@ -8,21 +8,27 @@
 #include <unordered_map>
 #include <list>
 #include <fstream>
+#include <mutex>
 #include "CacheManager.h"
+
 
 template<class Problem, class Solution>
 class FileCacheManager : public CacheManager<Problem, Solution> {
 	list <Problem> lru;
 	int size = 5;
 	unordered_map<Problem, pair<Solution, typename list<Problem>::iterator>> cache;
+	mutex _m;
 public:
 
 	void saveSolution(Problem problem, Solution solution) override {
+
 		//making hash of the string so it won't be long
 		hash<Problem> myHash;
 		int hashForFile = myHash(problem);
 		string hashProblemStr = to_string(hashForFile);
+		_m.lock();
 		auto objIter = this->cache.find(hashProblemStr);
+		_m.unlock();
 		//obj not in cache
 		if (objIter != this->cache.end()) {
 			throw "already in map";
@@ -37,6 +43,7 @@ public:
 		ofStream1 << solution;
 		ofStream1.close();
 
+		_m.lock();
 		//change LRU because size is too big
 		if (this->cache.size() == (unsigned) this->size) {
 			auto last = this->lru.back();
@@ -46,6 +53,8 @@ public:
 		//insert to cache and lru
 		this->lru.push_front(hashProblemStr);
 		this->cache.insert(make_pair(hashProblemStr, make_pair(solution, this->lru.begin())));
+		cout << "saved solution in cache: " << solution << endl;
+		_m.unlock();
 	}
 
 	//get solution from cache - map or file
@@ -54,10 +63,12 @@ public:
 		hash<string> myHash;
 		int hashForFile = myHash(problem);
 		string hashProblemStr = to_string(hashForFile);
+		_m.lock();
 		auto objIter = this->cache.find(hashProblemStr);
 		//obj not in cache
 		if (objIter == this->cache.end()) {
-
+			cout << "found in text file" << endl << endl << endl;
+			_m.unlock();
 			if (!fileExists(hashProblemStr)) {
 				throw "an error";
 			}
@@ -71,6 +82,8 @@ public:
 			while (getline(ifStream1, line)) {
 				solution += line;
 			}
+			ifStream1.close();
+			_m.lock();
 			if (this->cache.size() == (unsigned) this->size) {
 				auto last = this->lru.back();
 				this->lru.pop_back();
@@ -78,16 +91,20 @@ public:
 			}
 			this->lru.push_front(hashProblemStr);
 			this->cache.insert(make_pair(hashProblemStr, make_pair(solution, this->lru.begin())));
-			ifStream1.close();
-
+			_m.unlock();
 			return solution;
 		} else { //found object in cash - put it in the front of list and return it
+			cout << "found in cache mapppppppppppppp" << endl << endl << endl;
 			if (this->lru.size() > 1) {
+				cout << "bigger than oneeeeeeeeeeee" << endl << endl << endl;
 				auto position = objIter->second.second;
 				this->lru.erase(position);
 				this->lru.push_front(objIter->first);
 			}
-			return objIter->second.first;
+			auto cacheSolution = objIter->second.first;
+			cout << cacheSolution << endl;
+			_m.unlock();
+			return cacheSolution;
 		}
 	}
 
@@ -96,13 +113,17 @@ public:
 		hash<string> myHash;
 		int hashForFile = myHash(problem);
 		string hashProblemStr = to_string(hashForFile);
+		_m.lock();
 		auto objIter = this->cache.find(hashProblemStr);
 		//obj not in map of cache
 		if (objIter == this->cache.end()) {
+			_m.unlock();
 			//obj not in disk
 			if (!fileExists(hashProblemStr)) {
 				return false;
 			}
+		} else {
+			_m.unlock();
 		}
 		return true;
 	}
@@ -110,10 +131,6 @@ public:
 	bool fileExists(const string &filename) {
 		ifstream iFile(filename.c_str());
 		return (bool) iFile;
-	}
-
-	CacheManager<Problem, Solution> *clone() override {
-		return new FileCacheManager<Problem, Solution>;
 	}
 
 };
