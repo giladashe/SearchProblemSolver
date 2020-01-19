@@ -70,15 +70,16 @@ int main(int argc, char *argv[]) {
 				 "0,0\n"
 				 "36,36\n";
 
-	Searcher<string, string> *dfs = new DFS<string, string>();
+	Searcher<string, string> *dfs = new AStar<string, string>();
 	Solver<string, string> *solver = new SearchSolver<string, string>(dfs);
 	string solution = solver->solve(str);
-	Server *server = new MyParallelServer();
-	CacheManager<string, string> *cacheManager = new FileCacheManager<string, string>();
-	// arguments to MyTestClientHandler
-	ClientHandler *clientHandler = new MyClientHandler<string, string>(solver, cacheManager);
-	thread serialServer(openServer, server, stoi(argv[1]), clientHandler);
-	serialServer.join();
+    //int numOfNodesDFS = dfs->getNumberOfNodesEvaluated();
+    Server *server = new MyParallelServer();
+    CacheManager<string, string> *cacheManager = new FileCacheManager<string, string>();
+    // arguments to MyTestClientHandler
+    ClientHandler *clientHandler = new MyClientHandler<string, string>(solver, cacheManager);
+    thread serialServer(openServer, server, stoi(argv[1]), clientHandler);
+    serialServer.join();
 
 	/*Searchable<string> *searchable = new Matrix<string>(str);
 	Searcher<string,string>* searcher = new BestFirstSearch<string,string>();

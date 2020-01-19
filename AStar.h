@@ -37,8 +37,7 @@ public:
             currentState->setColor(black);
             // for each neighbor of current
             for (auto state: searchable->getAllPossibleStates(currentState)) {
-                if (state->getCost() != -1){
-                    Searcher<Problem, Solution>::increaseNumOfNodes();
+                if (state->getCost() != -1 && (state->getColor() == white)){
                     // tentative Gscore
                     int tentativeGscore = currentState->getDistanceFromSource()
                                           + state->getCost();
@@ -63,6 +62,7 @@ public:
                         pqueue_F.push(*it);
                     }
                     if (neighborNotInPqueue_F || tentativeGscore < state->getDistanceFromSource()){
+                        Searcher<Problem, Solution>::increaseNumOfNodes();
                         state->setCameFrom(currentState);
                         state->setDistanceFromSource(tentativeGscore);
                         state->setHScore(state,searchable->getGoalStates().at(0));
