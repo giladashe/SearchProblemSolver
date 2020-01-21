@@ -27,7 +27,7 @@ public:
 			State<Problem> *stateOnTop = myStack.top();
 			myStack.pop();
 			for (auto currentState: searchable->getAllPossibleStates(stateOnTop)) {
-				if (currentState->getCost() != -1 && currentState->getColor() == WHITE) {
+				if (currentState->getCost() != -1 && currentState->getColor() == white) {
 					currentState->setColor(gray);
 					currentState->setDistanceFromSource(stateOnTop->getDistanceFromSource() + currentState->getCost());
 					currentState->setCameFrom(stateOnTop);

@@ -17,7 +17,7 @@ public:
 
 	Solution solve(Problem problem) override {
         Searchable<Problem>* matrix = new Matrix<Problem>(problem);
-		return this->searcher->search(matrix);
+		return this->_searcher->search(matrix);
 	}
 
 	Solver<Problem, Solution> *clone() override {

@@ -26,7 +26,7 @@ public:
 	}
 
 
-	virtual void handleClient(int clientSocket) {
+	void handleClient(int clientSocket) override {
 		bool stop = false;
 		string between_lines;
 		string allMatrix; // with start & end points
