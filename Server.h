@@ -7,7 +7,6 @@
 
 #include "ClientHandler.h"
 #include "CacheManager.h"
-#include "MySerialServer.h"
 #include "FileCacheManager.h"
 #include "MyTestClientHandler.h"
 #include "Server.h"

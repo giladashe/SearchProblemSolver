@@ -11,7 +11,6 @@
 #include "AStar.h"
 #include "ClientHandler.h"
 #include "CacheManager.h"
-#include "MySerialServer.h"
 #include "FileCacheManager.h"
 #include "MyTestClientHandler.h"
 #include "Server.h"
@@ -137,7 +136,7 @@ public:
 		Solver<string, string> *solver = new SearchSolver<string, string>(aStar);
 		string solution = solver->solve(str);
 		int numOfNodesDFS = aStar->getNumberOfNodesEvaluated();
-		Server *server = new MyParallelServer();
+		Server *server = new MySerialServer();
 		CacheManager<string, string> *cacheManager = new FileCacheManager<string, string>();
 		// arguments to MyTestClientHandler
 		ClientHandler *clientHandler = new MyClientHandler<string, string>(solver, cacheManager);

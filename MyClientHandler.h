@@ -71,6 +71,7 @@ public:
 	ClientHandler *clone() override {
 		return new MyClientHandler<Problem, Solution>(_solver->clone(), _cm);
 	}
+
 };
 
 #endif //SEARCHPROBLEMSOLVER_MYCLIENTHANDLER_H

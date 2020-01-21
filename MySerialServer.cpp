@@ -9,9 +9,7 @@
 
 using namespace server_side;
 
-MySerialServer::~MySerialServer() {
-
-}
+MySerialServer::~MySerialServer() = default;
 
 void MySerialServer::open(int port, ClientHandler *clientHandler) {
 	int socketfd = socket(AF_INET, SOCK_STREAM, 0);

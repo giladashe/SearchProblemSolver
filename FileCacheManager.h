@@ -15,7 +15,7 @@
 template<class Problem, class Solution>
 class FileCacheManager : public CacheManager<Problem, Solution> {
 	list <Problem> lru;
-	int size = 5;
+	int size = 15;
 	unordered_map<Problem, pair<Solution, typename list<Problem>::iterator>> cache;
 	mutex _m;
 public:
@@ -53,7 +53,6 @@ public:
 		//insert to cache and lru
 		this->lru.push_front(hashProblemStr);
 		this->cache.insert(make_pair(hashProblemStr, make_pair(solution, this->lru.begin())));
-		cout << "saved solution in cache: " << solution << endl;
 		_m.unlock();
 	}
 
@@ -67,7 +66,6 @@ public:
 		auto objIter = this->cache.find(hashProblemStr);
 		//obj not in cache
 		if (objIter == this->cache.end()) {
-			cout << "found in text file" << endl << endl << endl;
 			_m.unlock();
 			if (!fileExists(hashProblemStr)) {
 				throw "an error";
@@ -94,15 +92,12 @@ public:
 			_m.unlock();
 			return solution;
 		} else { //found object in cash - put it in the front of list and return it
-			cout << "found in cache mapppppppppppppp" << endl << endl << endl;
 			if (this->lru.size() > 1) {
-				cout << "bigger than oneeeeeeeeeeee" << endl << endl << endl;
 				auto position = objIter->second.second;
 				this->lru.erase(position);
 				this->lru.push_front(objIter->first);
 			}
 			auto cacheSolution = objIter->second.first;
-			cout << cacheSolution << endl;
 			_m.unlock();
 			return cacheSolution;
 		}

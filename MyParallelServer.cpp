@@ -12,9 +12,7 @@ using namespace server_side;
 
 void getFromClient(int client_socket, ClientHandler *clientHandler);
 
-MyParallelServer::~MyParallelServer() {
-
-}
+MyParallelServer::~MyParallelServer() = default;
 
 void MyParallelServer::open(int port, ClientHandler *clientHandler) {
 	int socketFd = socket(AF_INET, SOCK_STREAM, 0);
