@@ -108,17 +108,18 @@ public:
 		int stateY = state->getLocation().second;
 		int counterX = stateX - 1;
 		int counterY = stateY;
-		if (this->inRange(stateX - 1, stateY)) {
+		// down, up, right, left
+        if (this->inRange(stateX + 1, stateY)) {
+            possibleStates.push_back(_states[stateX + 1][stateY]);
+        }
+        if (this->inRange(stateX - 1, stateY)) {
 			possibleStates.push_back(_states[stateX - 1][stateY]);
 		}
-		if (this->inRange(stateX, stateY - 1)) {
+        if (this->inRange(stateX, stateY + 1)) {
+            possibleStates.push_back(_states[stateX][stateY + 1]);
+        }
+        if (this->inRange(stateX, stateY - 1)) {
 			possibleStates.push_back(_states[stateX][stateY - 1]);
-		}
-		if (this->inRange(stateX, stateY + 1)) {
-			possibleStates.push_back(_states[stateX][stateY + 1]);
-		}
-		if (this->inRange(stateX + 1, stateY)) {
-			possibleStates.push_back(_states[stateX + 1][stateY]);
 		}
 		return possibleStates;
 	}

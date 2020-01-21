@@ -10,10 +10,10 @@
 
 template<class Problem, class Solution>
 class SearchSolver : public Solver<Problem, Solution> {
-	Searcher<Problem, Solution> *searcher;
+	Searcher<Problem, Solution> *_searcher;
 
 public:
-	SearchSolver(Searcher<Problem, Solution> *searcher) : searcher(searcher) {};
+	SearchSolver(Searcher<Problem, Solution> *searcher) : _searcher(searcher) {};
 
 	Solution solve(Problem problem) override {
         Searchable<Problem>* matrix = new Matrix<Problem>(problem);
@@ -21,7 +21,7 @@ public:
 	}
 
 	Solver<Problem, Solution> *clone() override {
-		return new SearchSolver<Problem, Solution>(searcher->clone());
+		return new SearchSolver<Problem, Solution>(_searcher->clone());
 	}
 };
 

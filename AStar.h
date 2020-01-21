@@ -23,10 +23,10 @@ public:
         initialState->setDistanceFromSource(initialState->getCost());
         // priority queue by minimal f = DistanceFromSource + h
         priority_queue<State<Problem>*, vector<State<Problem>*>, FCompare> pqueue_F;//
-        pqueue_F.push(initialState);
+        pqueue_F.push(searchable->getInitialState());
         // setF for initial state
         initialState->setHScore(initialState,searchable->getGoalStates().at(0));
-        initialState->setFScore(initialState->getHScore());
+        initialState->setFScore(initialState->getCost()+initialState->getHScore());
         while (!pqueue_F.empty()) {
             State<Problem> *currentState = pqueue_F.top();
             if (searchable->isGoalState(currentState)) {
