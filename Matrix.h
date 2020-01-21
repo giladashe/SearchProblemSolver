@@ -1,7 +1,3 @@
-//
-// Created by giladasher on 14/01/2020.
-//
-
 #ifndef SEARCHPROBLEMSOLVER_MATRIX_H
 #define SEARCHPROBLEMSOLVER_MATRIX_H
 
@@ -73,13 +69,14 @@ public:
 					this->_goalStates.push_back(this->_states[first][second]);
 				}
 			} else {
-				//todo put in vector - it's a line
+				//make a line of the matrix
 				vector<State<Problem> *> rowStates;
 				int row = this->_rows;
 				for (int j = 0; j < this->_columns; j++) {
 					auto *state = new State<Problem>(make_pair(row, j), stoi(splitByComma[j]));
 					rowStates.push_back(state);
 				}
+				//insert line to lines of the matrix
 				this->_states.push_back(rowStates);
 				this->_rows++;
 			}
@@ -103,7 +100,7 @@ public:
 	}
 
 	vector<State<Problem> *> getAllPossibleStates(State<Problem> *state) override {
-		//todo this function using "in range"
+		//get all possible states you can go from given state (using range of the matrix)
 		vector<State<Problem> *> possibleStates;
 		int stateX = state->getLocation().first;
 		int stateY = state->getLocation().second;

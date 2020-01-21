@@ -131,7 +131,9 @@ public:
 					 "5,9,3,11,8,10,9,20,12,2,-1,15,7,11,12,7,20,5,10,4,19,15,17,10,15,20,19,0,5,16,9,19,7,7,9,9,5,12,0,12,1,1,4,8,4,-1,2,20,10,4\n"
 					 "8,11,15,17,8,0,0,18,16,5,11,15,12,8,-1,2,7,2,13,14,1,13,4,8,8,6,5,7,7,17,15,11,-1,3,0,17,19,13,2,5,-1,19,0,6,10,7,13,6,12,3\n"
 					 "0,0\n"
-					 "49,49\n";
+					 "49,49\n"
+					 "5,9\n"
+					 "end\n";
 		Searcher<string, string> *aStar = new AStar<string, string>();
 		Solver<string, string> *solver = new SearchSolver<string, string>(aStar);
 		string solution = solver->solve(str);

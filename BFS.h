@@ -1,6 +1,3 @@
-//
-// Created by giladasher on 14/01/2020.
-//
 
 #ifndef SEARCHPROBLEMSOLVER_BFS_H
 #define SEARCHPROBLEMSOLVER_BFS_H

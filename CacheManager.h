@@ -1,7 +1,3 @@
-//
-// Created by giladasher on 08/01/2020.
-//
-
 #ifndef SEARCHPROBLEMSOLVER_CACHEMANAGER_H
 #define SEARCHPROBLEMSOLVER_CACHEMANAGER_H
 

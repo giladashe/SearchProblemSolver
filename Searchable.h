@@ -1,6 +1,4 @@
-//
-// Created by giladasher on 13/01/2020.
-//
+
 
 #ifndef SEARCHPROBLEMSOLVER_SEARCHABLE_H
 #define SEARCHPROBLEMSOLVER_SEARCHABLE_H
