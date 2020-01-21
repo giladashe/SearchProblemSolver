@@ -38,19 +38,21 @@ public:
 	}
 
 	Matrix(string matrixStr) {
-		//todo make matrix from str
+		//makes matrix from str
 		bool hasCols = false;
 		bool hasInitial = false;
 		// the x,y pair of location
 		int first = 0;
 		int second = 0;
+		//split by lines
 		vector<string> splitLines = Matrix::splitByDelimiter(matrixStr, "\n");
 		vector<string> splitByComma;
+		//go over all the lines and
 		for (auto &splitLine : splitLines) {
 			splitLine.erase(remove(splitLine.begin(), splitLine.end(), ' '), splitLine.end());
 			splitLine.erase(remove(splitLine.begin(), splitLine.end(), '\t'), splitLine.end());
 			splitByComma = Matrix::splitByDelimiter(splitLine, ",");
-			if (splitByComma.empty()) {
+			if (splitByComma.size() < 2) {
 				continue;
 			}
 			if (!hasCols) {
@@ -59,24 +61,23 @@ public:
 			}
 			if (splitByComma.size() != this->_columns) {
 				if (!hasInitial) {
-					//todo initial
+					//we are in the line of the point of start
 					first = stoi(splitByComma[0]);
 					second = stoi(splitByComma[1]);
 					this->_initialState = this->_states[first][second];
 					hasInitial = true;
 				} else {
-					//todo goal
+					//we're in the line of the goal point
 					first = stoi(splitByComma[0]);
 					second = stoi(splitByComma[1]);
 					this->_goalStates.push_back(this->_states[first][second]);
-					break;
 				}
 			} else {
 				//todo put in vector - it's a line
 				vector<State<Problem> *> rowStates;
 				int row = this->_rows;
 				for (int j = 0; j < this->_columns; j++) {
-					auto* state = new State<Problem>(make_pair(row, j), stoi(splitByComma[j]));
+					auto *state = new State<Problem>(make_pair(row, j), stoi(splitByComma[j]));
 					rowStates.push_back(state);
 				}
 				this->_states.push_back(rowStates);
@@ -109,28 +110,28 @@ public:
 		int counterX = stateX - 1;
 		int counterY = stateY;
 		// down, up, right, left
-        if (this->inRange(stateX + 1, stateY)) {
-            possibleStates.push_back(_states[stateX + 1][stateY]);
-        }
-        if (this->inRange(stateX - 1, stateY)) {
+		if (this->inRange(stateX + 1, stateY)) {
+			possibleStates.push_back(_states[stateX + 1][stateY]);
+		}
+		if (this->inRange(stateX - 1, stateY)) {
 			possibleStates.push_back(_states[stateX - 1][stateY]);
 		}
-        if (this->inRange(stateX, stateY + 1)) {
-            possibleStates.push_back(_states[stateX][stateY + 1]);
-        }
-        if (this->inRange(stateX, stateY - 1)) {
+		if (this->inRange(stateX, stateY + 1)) {
+			possibleStates.push_back(_states[stateX][stateY + 1]);
+		}
+		if (this->inRange(stateX, stateY - 1)) {
 			possibleStates.push_back(_states[stateX][stateY - 1]);
 		}
 		return possibleStates;
 	}
 
-	vector<vector<State<Problem> *>>  getStates() override {
+	vector<vector<State<Problem> *>> getStates() override {
 		return _states;
 	}
 
-    vector<State<Problem>*> getGoalStates() override {
-        return _goalStates;
-    }
+	vector<State<Problem> *> getGoalStates() override {
+		return _goalStates;
+	}
 
 
 };
