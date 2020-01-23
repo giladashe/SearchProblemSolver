@@ -1,0 +1,279 @@
+commit b862c06444c710759b30e62af6ea60aea7a4bfe2
+Author: giladasher <giladash@gmail.com>
+Date:   Thu Jan 23 14:39:28 2020 +0200
+
+    changed readMe a bit
+
+commit f6aecd77dec2775d36bf6eb0e30075d87a58efd9
+Author: shaiyis <shaiyis@gmail.com>
+Date:   Thu Jan 23 14:33:01 2020 +0200
+
+    readme
+
+commit 2b44640e8af22d66b681ad27d37fb99652fa6a15
+Author: shaiyis <shaiyis@gmail.com>
+Date:   Thu Jan 23 14:06:22 2020 +0200
+
+    2048 buffer
+
+commit 74ead2324754a97b4f47b3030898d14ee64b8eed
+Author: giladasher <giladash@gmail.com>
+Date:   Thu Jan 23 13:28:30 2020 +0200
+
+    destructors
+
+commit 9df051f2b0aa7a46b63606cafc735874bd1dac4c
+Author: giladasher <giladash@gmail.com>
+Date:   Tue Jan 21 22:28:28 2020 +0200
+
+    removed some unnecessary lines
+
+commit 8e70544234b9e506433627f44054c2e177512254
+Author: giladasher <giladash@gmail.com>
+Date:   Tue Jan 21 22:19:48 2020 +0200
+
+    now supports multiple goal states
+
+commit aac9dcc876d981a2cbfb91fc11a249fd2a2c397f
+Author: giladasher <giladash@gmail.com>
+Date:   Tue Jan 21 22:08:18 2020 +0200
+
+    arranged some stuff
+
+commit b1d9532ed5d382f0f78b2ae889907295a9806887
+Author: giladasher <giladash@gmail.com>
+Date:   Tue Jan 21 21:46:08 2020 +0200
+
+    put main in namespace boot
+
+commit a521e7f0ffedef8227c5099cc76a3b160f47a6e7
+Author: shaiyis <shaiyis@gmail.com>
+Date:   Tue Jan 21 20:30:11 2020 +0200
+
+    A* returns 321 on 6 matrix
+
+commit 6d9455fbb1e1e7e5ab7b4996cf50d5572a0ebb42
+Author: shaiyis <shaiyis@gmail.com>
+Date:   Sun Jan 19 23:41:23 2020 +0200
+
+    A* + best
+
+commit bf45b1b1293ee03056786d476d8bcb197d6788f9
+Author: giladasher <giladash@gmail.com>
+Date:   Sun Jan 19 22:25:50 2020 +0200
+
+    put mutex in file CacheManager
+
+commit 55c2880cbbe071b76411d29ccae26f3ac9338436
+Author: giladasher <giladash@gmail.com>
+Date:   Sun Jan 19 19:52:02 2020 +0200
+
+    made clones
+
+commit b9de983429f9c654347fb4dad8d3811f640f3c0b
+Author: giladasher <giladash@gmail.com>
+Date:   Sun Jan 19 00:07:01 2020 +0200
+
+    added the first node's cost, fixed timeout
+
+commit e516fa80615c61c99a71977c2cf6475dcaee9263
+Author: giladasher <giladash@gmail.com>
+Date:   Sat Jan 18 21:16:31 2020 +0200
+
+    changed parallel server
+
+commit c43fd48616edda61653cf69f7aeb54549eed59ed
+Author: giladasher <giladash@gmail.com>
+Date:   Fri Jan 17 15:33:34 2020 +0200
+
+    changed parallel server
+
+commit 114d45add42aaf20ef26a2f890731cecbcf741e1
+Author: giladasher <giladash@gmail.com>
+Date:   Fri Jan 17 14:59:32 2020 +0200
+
+    fixed cache manager and started parallel server
+
+commit 411e2b5f2b53dd7627525956b9367b262c8ae7fd
+Author: shaiyis <shaiyis@gmail.com>
+Date:   Fri Jan 17 14:12:56 2020 +0200
+
+    server recieves matrix solution
+
+commit 8279634cc30dde09db44e09e9911f6fc53457806
+Author: shaiyis <shaiyis@gmail.com>
+Date:   Fri Jan 17 14:11:18 2020 +0200
+
+    server recieves matrix solution
+
+commit 5457e0148af4576d7aa7138e8c9b5e7f955581d1
+Author: shaiyis <shaiyis@gmail.com>
+Date:   Fri Jan 17 12:32:25 2020 +0200
+
+    server recieves matrix solution
+
+commit 38194198f43c4ba32ff3ec0a8da9442f15025b11
+Author: shaiyis <shaiyis@gmail.com>
+Date:   Fri Jan 17 12:25:50 2020 +0200
+
+    server recieves matrix solution
+
+commit 2532fe966338d96989b9fb7b7f100690d64c6541
+Author: shaiyis <shaiyis@gmail.com>
+Date:   Fri Jan 17 01:20:37 2020 +0200
+
+    server recieves matrix solution
+
+commit f4df66811e91d125c1b53b13600e822fb0a0b25b
+Author: shaiyis <shaiyis@gmail.com>
+Date:   Thu Jan 16 23:13:17 2020 +0200
+
+    A* and Best First Search
+
+commit b963251ddb1e5458fb3eae39688d11fd804962ce
+Merge: 41f6f52 2c5465b
+Author: shaiyis <shaiyis@gmail.com>
+Date:   Thu Jan 16 23:10:25 2020 +0200
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #       main.cpp
+
+commit 41f6f5268f4f31eccde9b1050fcd82863000367a
+Author: shaiyis <shaiyis@gmail.com>
+Date:   Thu Jan 16 22:39:09 2020 +0200
+
+    A* and Best First Search
+
+commit 2c5465bfe1cca5f4f25c77dbba2a30b0584c9a8a
+Author: giladasher <giladash@gmail.com>
+Date:   Thu Jan 16 22:37:07 2020 +0200
+
+    changed things in matrix (hash)
+
+commit 7e4fe51a107672a387f8d57ca3d09935f079f060
+Author: giladasher <giladash@gmail.com>
+Date:   Wed Jan 15 22:21:05 2020 +0200
+
+    changed to cost in BFS & DFS
+
+commit b77cb5e4f993c066d994503af551736b7e322310
+Author: giladasher <giladash@gmail.com>
+Date:   Wed Jan 15 21:01:25 2020 +0200
+
+    changed some staff
+
+commit 1f896a85c79ea789014f8a41c4be5b5f777e3aa4
+Author: giladasher <giladash@gmail.com>
+Date:   Wed Jan 15 16:35:36 2020 +0200
+
+    made some protected functions in searcher
+
+commit b63098cbde9943aa77bc98362e52ac31fe482ce0
+Author: giladasher <giladash@gmail.com>
+Date:   Wed Jan 15 16:26:05 2020 +0200
+
+    put initialize in searcher and put break in goal
+
+commit e44b66c68891a3eb3d2d80f5bd9cb2705e4c7e20
+Author: giladasher <giladash@gmail.com>
+Date:   Wed Jan 15 14:21:01 2020 +0200
+
+    changed the matrix and did BFS
+
+commit 4e41f71499702e96df4c1657dff54d1d268217c3
+Author: giladasher <giladash@gmail.com>
+Date:   Tue Jan 14 19:20:47 2020 +0200
+
+    almost finished matrix
+
+commit 575a1c9f9b05c637786d7a5ba516fcab7d010bd9
+Author: giladasher <giladash@gmail.com>
+Date:   Tue Jan 14 15:20:12 2020 +0200
+
+    added all algorithms structure
+
+commit cac40463dd674dacfc05de3f22fdbeca64260581
+Author: giladasher <giladash@gmail.com>
+Date:   Mon Jan 13 23:22:36 2020 +0200
+
+    added more classes - searchers and state
+
+commit d7eb4284ff0382b3c3e575f8ba80ef021b37e28d
+Author: giladasher <giladash@gmail.com>
+Date:   Mon Jan 13 22:35:13 2020 +0200
+
+    added hash for name of binary file
+
+commit c9a014f898315e6583d261a6a8ef76f936fdce1e
+Author: giladasher <giladash@gmail.com>
+Date:   Mon Jan 13 22:17:02 2020 +0200
+
+    string reverser built
+
+commit fec59af0c5e45ec71a5f16c4e2ee79798eba5ae6
+Author: shaiyis <shaiyis@gmail.com>
+Date:   Mon Jan 13 21:11:33 2020 +0200
+
+    Part 2 works and python client script recieves reversed string.
+
+commit 4cfecea8d477ee9fb3bbb1d6a1c9a80edc9a0d89
+Author: giladasher <giladash@gmail.com>
+Date:   Mon Jan 13 00:39:26 2020 +0200
+
+    string reverser built
+
+commit 0f524d42453b1280246292e5f8eb7ca96bbd61e5
+Author: shaiyis <shaiyis@gmail.com>
+Date:   Sun Jan 12 21:39:29 2020 +0200
+
+    my serial server, my testClientHandler
+
+commit 3e2770e9a021c1f3e57ffeff748818a51c770711
+Author: giladasher <giladash@gmail.com>
+Date:   Sun Jan 12 19:27:40 2020 +0200
+
+    string reverser built
+
+commit 5c2159b050200093b578cfdfa51842c56cd0a824
+Author: shaiyis <shaiyis@gmail.com>
+Date:   Sat Jan 11 22:48:02 2020 +0200
+
+    my serial server
+
+commit 30a02582c01646a4bc93098de53712930e50ea53
+Author: giladasher <giladash@gmail.com>
+Date:   Sat Jan 11 22:39:26 2020 +0200
+
+    main namespace
+
+commit 955e1361de9689935a3a3e57d6b8181d4f7559e9
+Author: giladasher <giladash@gmail.com>
+Date:   Sat Jan 11 22:31:09 2020 +0200
+
+    bool stop in my serial server
+
+commit 2c7078e3264602a10ff0807dc94b7cbfb6ed972f
+Author: giladasher <giladash@gmail.com>
+Date:   Sat Jan 11 22:16:01 2020 +0200
+
+    FileCacheManager.h updated
+
+commit 561965457ed412aa084d95417553f3b235ecdc5f
+Author: giladasher <giladash@gmail.com>
+Date:   Thu Jan 9 11:25:34 2020 +0200
+
+    changed a bit
+
+commit 6014f823316185f4967f1c7f9821301bfd804229
+Author: giladasher <giladash@gmail.com>
+Date:   Thu Jan 9 11:19:35 2020 +0200
+
+    practically the beginning
+
+commit 873ed5dfe29a28b282883c7aa052a24a96c3c2aa
+Author: giladasher <giladash@gmail.com>
+Date:   Wed Jan 8 12:06:19 2020 +0200
+
+    Initial commit
