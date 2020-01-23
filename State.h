@@ -72,10 +72,6 @@ public:
 	State<Problem> *getCameFrom() const {
 		return _cameFrom;
 	}
-
-	/*friend bool operator>(const State &ls, const State &rs) {
-		return ls.getCost() > rs.getCost();
-	}*/
 };
 
 #endif //SEARCHPROBLEMSOLVER_STATE_H

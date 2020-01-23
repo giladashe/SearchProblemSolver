@@ -9,6 +9,8 @@ using namespace std;
 
 class ClientHandler {
 public:
+	virtual ~ClientHandler() = default;
+
 	virtual void handleClient(int clientSocket) = 0;
 
 	virtual ClientHandler *clone() = 0;

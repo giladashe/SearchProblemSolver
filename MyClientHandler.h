@@ -65,9 +65,13 @@ public:
 	}
 
 	ClientHandler *clone() override {
-		return new MyClientHandler<Problem, Solution>(_solver->clone(), _cm);
+		return new MyClientHandler<Problem, Solution>(_solver->clone(), _cm->clone());
 	}
 
+	~MyClientHandler() override {
+		delete this->_cm;
+		delete this->_solver;
+	}
 };
 
 #endif //SEARCHPROBLEMSOLVER_MYCLIENTHANDLER_H

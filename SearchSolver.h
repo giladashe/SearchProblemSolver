@@ -15,11 +15,17 @@ public:
 
 	Solution solve(Problem problem) override {
         Searchable<Problem>* matrix = new Matrix<Problem>(problem);
-		return this->_searcher->search(matrix);
+        Solution solution = this->_searcher->search(matrix);
+        delete matrix;
+		return solution;
 	}
 
 	Solver<Problem, Solution> *clone() override {
 		return new SearchSolver<Problem, Solution>(_searcher->clone());
+	}
+
+	~SearchSolver() override  {
+		delete this->_searcher;
 	}
 };
 

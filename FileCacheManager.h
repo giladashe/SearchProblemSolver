@@ -15,7 +15,6 @@ class FileCacheManager : public CacheManager<Problem, Solution> {
 	list <Problem> lru;
 	int size = 15;
 	unordered_map<Problem, pair<Solution, typename list<Problem>::iterator>> cache;
-	mutex _m;
 public:
 
 	void saveSolution(Problem problem, Solution solution) override {
@@ -24,9 +23,7 @@ public:
 		hash<Problem> myHash;
 		int hashForFile = myHash(problem);
 		string hashProblemStr = to_string(hashForFile);
-		_m.lock();
 		auto objIter = this->cache.find(hashProblemStr);
-		_m.unlock();
 		//obj not in cache
 		if (objIter != this->cache.end()) {
 			throw "already in map";
@@ -41,7 +38,6 @@ public:
 		ofStream1 << solution;
 		ofStream1.close();
 
-		_m.lock();
 		//change LRU because size is too big
 		if (this->cache.size() == (unsigned) this->size) {
 			auto last = this->lru.back();
@@ -51,7 +47,6 @@ public:
 		//insert to cache and lru
 		this->lru.push_front(hashProblemStr);
 		this->cache.insert(make_pair(hashProblemStr, make_pair(solution, this->lru.begin())));
-		_m.unlock();
 	}
 
 	//get solution from cache - map or file
@@ -60,11 +55,9 @@ public:
 		hash<string> myHash;
 		int hashForFile = myHash(problem);
 		string hashProblemStr = to_string(hashForFile);
-		_m.lock();
 		auto objIter = this->cache.find(hashProblemStr);
 		//obj not in cache
 		if (objIter == this->cache.end()) {
-			_m.unlock();
 			if (!fileExists(hashProblemStr)) {
 				throw "an error";
 			}
@@ -79,7 +72,6 @@ public:
 				solution += line;
 			}
 			ifStream1.close();
-			_m.lock();
 			if (this->cache.size() == (unsigned) this->size) {
 				auto last = this->lru.back();
 				this->lru.pop_back();
@@ -87,7 +79,6 @@ public:
 			}
 			this->lru.push_front(hashProblemStr);
 			this->cache.insert(make_pair(hashProblemStr, make_pair(solution, this->lru.begin())));
-			_m.unlock();
 			return solution;
 		} else { //found object in cash - put it in the front of list and return it
 			if (this->lru.size() > 1) {
@@ -96,7 +87,6 @@ public:
 				this->lru.push_front(objIter->first);
 			}
 			auto cacheSolution = objIter->second.first;
-			_m.unlock();
 			return cacheSolution;
 		}
 	}
@@ -106,17 +96,13 @@ public:
 		hash<string> myHash;
 		int hashForFile = myHash(problem);
 		string hashProblemStr = to_string(hashForFile);
-		_m.lock();
 		auto objIter = this->cache.find(hashProblemStr);
 		//obj not in map of cache
 		if (objIter == this->cache.end()) {
-			_m.unlock();
 			//obj not in disk
 			if (!fileExists(hashProblemStr)) {
 				return false;
 			}
-		} else {
-			_m.unlock();
 		}
 		return true;
 	}
@@ -126,6 +112,9 @@ public:
 		return (bool) iFile;
 	}
 
+	CacheManager<Problem, Solution> *clone() override {
+		return new FileCacheManager<Problem, Solution>;
+	}
 };
 
 

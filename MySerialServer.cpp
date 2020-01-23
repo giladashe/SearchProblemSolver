@@ -49,6 +49,7 @@ void MySerialServer::open(int port, ClientHandler *clientHandler) {
 		if (client_socket == -1) {
 			if (errno == EWOULDBLOCK) {
 				cout << "timeout!" << endl;
+				delete clientHandler;
 				break;
 			}
 			cerr << "Error accepting client" << endl;

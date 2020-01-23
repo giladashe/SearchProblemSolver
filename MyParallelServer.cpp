@@ -65,5 +65,5 @@ void MyParallelServer::open(int port, ClientHandler *clientHandler) {
 void getFromClient(int client_socket, ClientHandler *clientHandler) {
 
 	clientHandler->handleClient(client_socket);
-	//delete(clientHandler);
+	delete clientHandler;
 }

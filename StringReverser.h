@@ -10,6 +10,7 @@ using namespace std;
 
 template<class Problem, class Solution>
 class StringReverser : public Solver<Problem, Solution> {
+	//get a string and make new reversed string
 	Solution solve(Problem problem) override {
 		string solution;
 		string problemStr(problem);

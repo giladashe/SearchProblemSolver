@@ -12,7 +12,6 @@ public:
 	Solution search(Searchable<Problem> *searchable) override {
         Searcher<Problem, Solution>::initialize(searchable);
         State<Problem> *goalState = nullptr;
-        bool reachedGoal = false;
         enum Color {
             white = 1, black
         };
@@ -71,6 +70,8 @@ public:
                 }
             }
         }
+        //didn't get solution
+		return nullptr;
 	}
 
     struct FCompare

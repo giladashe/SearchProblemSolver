@@ -12,6 +12,8 @@ template<class Problem>
 class Searchable {
 
 public:
+	virtual ~Searchable() = default;
+
 	virtual State<Problem>* getInitialState() = 0;
 
 	virtual bool isGoalState(const State<Problem>* state) = 0;

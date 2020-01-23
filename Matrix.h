@@ -55,7 +55,7 @@ public:
 				this->_columns = splitByComma.size();
 				hasCols = true;
 			}
-			if (splitByComma.size() != this->_columns) {
+			if (splitByComma.size() != (unsigned) this->_columns) {
 				if (!hasInitial) {
 					//we are in the line of the point of start
 					first = stoi(splitByComma[0]);
@@ -104,8 +104,6 @@ public:
 		vector<State<Problem> *> possibleStates;
 		int stateX = state->getLocation().first;
 		int stateY = state->getLocation().second;
-		int counterX = stateX - 1;
-		int counterY = stateY;
 		// down, up, right, left
 		if (this->inRange(stateX + 1, stateY)) {
 			possibleStates.push_back(_states[stateX + 1][stateY]);
@@ -122,15 +120,23 @@ public:
 		return possibleStates;
 	}
 
+	//get all the states of the matrix
 	vector<vector<State<Problem> *>> getStates() override {
 		return _states;
 	}
 
+	//get the goal states of the matrix
 	vector<State<Problem> *> getGoalStates() override {
 		return _goalStates;
 	}
 
-
+	virtual ~Matrix() {
+		for (auto vectorState:this->_states) {
+			for (auto state:vectorState) {
+				delete state;
+			}
+		}
+	}
 };
 
 #endif //SEARCHPROBLEMSOLVER_MATRIX_H

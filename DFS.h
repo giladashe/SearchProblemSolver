@@ -1,5 +1,4 @@
 
-
 #ifndef SEARCHPROBLEMSOLVER_DFS_H
 #define SEARCHPROBLEMSOLVER_DFS_H
 
@@ -10,16 +9,19 @@ template<class Problem, class Solution>
 class DFS : public Searcher<Problem, Solution> {
 public:
 	Solution search(Searchable<Problem> *searchable) override {
-		stack < State<Problem> * > myStack;
-		Searcher<Problem, Solution>::initialize(searchable);
-		State<Problem> *initial = searchable->getInitialState();
-		initial->setDistanceFromSource(initial->getCost());
 		enum Color {
 			white = 1, gray, black
 		};
-		initial->setColor(gray);
-		myStack.push(searchable->getInitialState());
 		bool reachedGoal = false;
+		//initialize the nodes
+		Searcher<Problem, Solution>::initialize(searchable);
+		//initialize the first node of the path
+		State<Problem> *initial = searchable->getInitialState();
+		initial->setDistanceFromSource(initial->getCost());
+		initial->setColor(gray);
+		//make stack for dfs algorithm
+		stack < State<Problem> * > myStack;
+		myStack.push(initial);
 		State<Problem> *goalState = nullptr;
 		while (!myStack.empty() && !reachedGoal) {
 			State<Problem> *stateOnTop = myStack.top();
