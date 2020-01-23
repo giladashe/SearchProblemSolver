@@ -29,9 +29,9 @@ public:
 
 		while (!stop) {
 			// initialize buffer to 0
-			char buffer[1024] = {0};
+			char buffer[2048] = {0};
 			// read
-			int readData = read(clientSocket, buffer, 1024);
+			int readData = read(clientSocket, buffer, 2048);
 			int i = 0;
 			while (i < readData) {
 				if (between_lines == "end") {
