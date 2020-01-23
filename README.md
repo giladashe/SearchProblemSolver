@@ -9,6 +9,6 @@ First you'll need to create files texts of matrices separated by n\ and finally 
 *Built With*
 Clion - IDE by JetBrains
 *Versioning*
-We used [Github](https://github.com/giladashe/flightSimulator) for version control.
+We used [Github](https://github.com/giladashe/SearchProblemSolver) for version control.
 *Authors*
 Gilad Asher and Israel Shai.
